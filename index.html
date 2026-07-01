@@ -350,8 +350,7 @@ const ROSIN = [
 ];
 const WPFF = [
   { brand:'1st Wash', type:'German Wpff', logo:LOGO_1STATIC,
-    items:[['Grapaya','90u'],['Garlic Breath','73u'],['Garlic Breath','90u'],['Garlic Breath','71u-139u · Fullspec']],
-    note:'1g · 80€' },
+    items:[['Garlic Breath','71u-139u · Fullspec','60'],['Garlic Breath','73u','70'],['Garlic Breath','90u','80'],['Grapaya','90u','80']] },
   { brand:'Chosen', type:'Single Source Wpff', logo:LOGO_CHOSEN,
     items:[['Maroccan Peaches','73u-140u']],
     note:'1g · 100€' },
@@ -369,11 +368,12 @@ const row = (n,p)=>`
     <span class="price font-mono" data-price="${p}">0€</span>
   </div>`;
 
-const specRow = (n,s)=>`
+const specRow = (n,s,p)=>`
   <div class="row">
     <span class="name">${n}</span>
     <span class="leader"></span>
-    <span class="spec font-mono">${s}</span>
+    ${s ? `<span class="spec font-mono">${s}</span>` : ''}
+    ${p ? `<span class="price font-mono" data-price="${p}" style="margin-left:.7em">0€</span>` : ''}
   </div>`;
 
 const brandBlock = (b)=>`
@@ -383,8 +383,8 @@ const brandBlock = (b)=>`
       <h3 class="brand uppercase tracking-[.14em] text-[.8vw] font-semibold">${b.brand}${b.type ? ` <span class="btype">· ${b.type}</span>` : ''}</h3>
     </div>
     ${b.scroll
-      ? `<div class="scrollbox"><ul class="scroller flex flex-col gap-[.05vh] mt-[.25vh]">${b.items.map(([n,s])=>specRow(n,s)).join('')}</ul></div>`
-      : `<ul class="flex flex-col gap-[.05vh] mt-[.25vh]">${b.items.map(([n,s])=>specRow(n,s)).join('')}</ul>`}
+      ? `<div class="scrollbox"><ul class="scroller flex flex-col gap-[.05vh] mt-[.25vh]">${b.items.map(([n,s,p])=>specRow(n,s,p)).join('')}</ul></div>`
+      : `<ul class="flex flex-col gap-[.05vh] mt-[.25vh]">${b.items.map(([n,s,p])=>specRow(n,s,p)).join('')}</ul>`}
     ${b.note ? `<div class="pricetag font-mono">${b.note}</div>` : ''}
   </div>`;
 
